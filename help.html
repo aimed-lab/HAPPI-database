@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+	<title>HAPPI</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta name="AUTHOR" content="Sudharani Mamidipalli">
+	<meta name="PUBLISHER" content="Sudharani Mamidipalli">
+	<meta name="description" content="Everything You need to know About human proteins, interactions, domains, functional annotations">
+	<meta name="keywords" content="Bioinformatics, Jake Chen, Systems Biology, Proteomics, Protein Interactomics,Domains, Sudharani Mamidipalli">
+</head>
+
+<body bgColor=white >
+	<table border="0">
+	  <tr>
+		<td width="100%"><a href="http://bio.informatics.iupui.edu/"><img src="http://discover.uits.indiana.edu:8340/genetool/images/IUPUI_group_logo.gif" alt="" name="IUPUI_Seal" border="0"></a> </td>
+	  </tr>
+	</table>
+	
+	<table width=100% border=0>
+	<tr>
+	  <td align="center" valign="center" bgcolor="plum" width="100%" height="20">
+	   <a href='index.stm' style=text-decoration:none>
+	   <font color=white face="Verdana, Arial, Helvetica, sans-serif" size="4">
+	   HAPPI Database - Documentation </font></a></td>
+	</tr>
+    </table>
+	
+	<br>
+	<h3>Table of Contents</h3>
+	<ul>
+	  <li><a href="#definition">What is HAPPI?</a></li>
+      <li><a href="#whyhappi">Why HAPPI?</a></li>
+      <li><a href="#architecture">System Architecture</a></li>
+      <li><a href="#source">Interaction Data Source</a></li>
+      <li><a href="#scoring">Interaction Scoring Method</a></li>
+      <li><a href="#ranking"> Interaction Ranking Method</a></li>
+      <li><a href="#sitemap">Web Database Site Map</a></li>
+      <li><a href="#userguide">User Guide</a></li>
+      <li>Start Using the HAPPI database <a href="/HAPPI/index.stm">here</a>  <br>
+      </li>
+</ul>
+	<p>&nbsp;  </p>
+	<h3><strong>What is HAPPI<a name="definition"></a></strong></h3>
+	<p>The Human Annotated and Predicted Protein Interaction  (HAPPI) Database is a free, open-access, and comprehensive  database collection
+    of computer annotated human protein-protein interactions from public data sources and computational predictions. </p>
+	<p>The database was developed by exhaustively integrating publicly available human protein interaction data from BIND,
+	  OPHID, MINT, IntAct, HPRD, and STRING databases into a data warehouse powered by our Oracle 10g relational database server. In the data warehouse, various types of sequence, structure, pathway, and literature annotation data from
+	  established bioinformatics resources such as NCBI, PubMed, UniProt, HUGO, EBI, PDB were also integrated. Our long-term goal is to develop a
+	  new type of protein interaction database resource for biomedical scientists, who are interested in
+	  evaluating biological significant protein interactions, developing disease pathway models, and identifying disease drug targets or diagnostic biomarkers.</p>
+	<h3><strong>Why HAPPI<a name="whyhappi"></a></strong></h3>
+<p>In the current release of the HAPPI database, users can examine protein interaction in many ways not available in other databases today.</p>
+    <ol>
+      <li>the database is very comprehensive, containing 142,956
+      non-redundant reliable human protein interaction pairs among 10,592 human proteins (identified by UniProt ID) as of version 1.2 released in August 2006. In  other major public protein interaction databases (except for STRING, where stastistics for human is uncertain), the average reported human interaction pairs range from a count of 10,000 to 45,000. </li>
+      <li>Each interaction in HAPPI is assigned a confidence score between 0 and 1 and a corresponding converted confidence
+      rank stars of 1, 2, 3, 4, and 5 (read the next section <a href="help.html#rankingmethod">here</a> for details). This scoring framework provides a unified framework for users to choose an appropriate reliability level (and therefore, a subset) of interactions for their own study. While &quot;total protein interactions&quot; represented in the HAPPI databases at all star ranks exceeds 1.2 million entries, HAPPI database defines &quot;reliable interactions&quot; stringently, requiring a &quot;reliable interaction&quot; to have a score of 0.75 and above (4 or 5 rank stars) to be included. </li>
+      <li>Each interaction in HAPPI is computationally annotated with bioinformatics data including biological pathway, gene function, protein family, protein structure, sequence features. The convenient convergence of these information enhances user's ability to examine the biological validity and significance of specific 
+        interactions and their relevance to disease specific studies.</li>
+    </ol>
+    <h3><strong>System Architecture<a name="architecture"></a></strong></h3>
+<p>
+  HAPPI database is developed as a classical 3-tier data-driven web application. 
+<ul>
+  <li>In the <strong>database tier</strong>, we host the HAPPI data warehouse on a collection of schemas powered by the <a href="http://www.oracle.com/database/index.html">Oracle 10g release2</a> relational database server. All the protein interaction data and related annotation data are imported from public sources, loaded into our database, and managed locally within our data warehouse.  We used relational database views extensively to hide complexity of database queries. </li>
+  <li>In the <strong>application logic tier</strong>, we used predominately <a href="http://www.php.net/">PHP</a> as an extension to Apcahe web server functionality to manage data transformation logic (e.g., conversion of confidence score to confidence ranks on the fly), database connection, and data post-processing. To assist pdb structure viewer  at the next layer display protein structures correctly, we also used PHP to generate temporary protein structure files on the web server for the viewer Applet to use.  </li>
+  <li> In the <strong>presentation tier</strong>, we used html to display textual and hyperlinked data in a grid 
+    and Java Applets to render dynamic database content in visual exploratory environment. The pdb structure viewer used is <a href="http://jmol.sourceforge.net/">JMOL</a>, an open-source Java applet. The sequence alignment viewer used is <a href="http://bio.informatics.iupui.edu/service/safmap.shtm">Safmap</a>, an Java applet developed internally. </li>
+</ul>
+<h3><strong>Interaction Data Source </strong><a name="source"></a></h3>
+<p>The majority of the human protein interaction data are extracted and integrated from <a href="http://www.hprd.org/">HPRD</a>, <a href="http://www.bind.ca/">BIND</a>, <a href="http://mint.bio.uniroma2.it/mint/">MINT</a>, <a href="http://string.embl.de/">STRING</a>, and the <a href="http://ophid.utoronto.ca/">OPHID</a> databases.  In particular, we adopted the data source naming standard from the OPHID database (for a listing all possible data source values, read here). For data integrated from HPRD, BIND, and MINT, we directly use the database names as the data source names. For data integrated from the STRING database, we classify the data source into two groups, eSTR which stands for &quot;experimentally derived subset of STRING interactions&quot;, and pSTR which stands for &quot;predicted/computationally-derived subset of STRING interactions&quot;. In summary, the data sources are:
+<div align="center">
+  <table width="619" border="1" cellpadding="0">
+    <tr>
+      <td width="75">BIND</td>
+      <td width="532"><div align="left">Human protein interactions found in the BIND database </div></td>
+    </tr>
+    <tr>
+      <td>MINT</td>
+      <td>Human protein interactions found in the MINT database </td>
+    </tr>
+    <tr>
+      <td>HPRD</td>
+      <td><div align="left">Human protein interactions found in the HPRD database </div></td>
+    </tr>
+    <tr>
+      <td>MIPS</td>
+      <td><div align="left">Human protein interactions found in the MIPS database </div></td>
+    </tr>
+    <tr>
+      <td>(misc.)</td>
+      <td>Additional recent experimental high-throughput human protein interaction data found in published studies, including JonesErbB1, Pawson, StelzlLow, StelzlMedium, StelzlHigh, VidalHuman_core, and VidalHuman_non_core</td>
+    </tr>
+    <tr>
+      <td>eSTR</td>
+      <td><div align="left">Human protein interactions found in the STRING database, experimentally derived, and also found in other public databases</div></td>
+    </tr>
+    <tr>
+      <td>pSTR</td>
+      <td>Human protein interactions found in the STRING database, computationally predicted from genomics/microarray data, or mined from PubMed abstracts </td>
+    </tr>
+    <tr>
+      <td>(other)</td>
+      <td>Human protein interactions computationally derived  and described in the OPHID database. The various codes indicate the types of source interaction data used to derive human interaction data. These include: CORE_1, CORE_2, NON_CORE, LITERATURE, SCAFFOLD, INTEROLOG, and CE_DATA from <strong><em>C elegans</em></strong>; low, medium, high, and Krogran_Core from <strong>yeast</strong>; AfCS, Suzuki, RikenDIP, RikenLit, and RikenBIND from <strong>mouse</strong>; FlyHigh, FlyLow, and FlyCellCycle from <strong><em>D. melanogaster</em></strong>; and WranaHigh, WranaMedium, and WranaLow from <strong>LUMIER</strong>. </td>
+    </tr>
+  </table>
+</div>
+<h3><strong>Interaction Scoring  Method<a name="scoring"></a></strong></h3>
+<p>  We developed a unified scoring model to assess the reliability of human
+ protein-protein interactions integrated from public  protein interaction databases. First, independent scoring
+systems for individual protein interaction databases to be integrated were developed (after consulting with our collaborating biomedical scientists), primarily based on heuristic scoring of experimental or computational protocol categories. Each interaction pair under a specific experimental/computational derivation method from a given source is assigned a heuristic confidence score S<em>i</em>, which provides an estimation how reliable or trustworthy interaction data from the method/source are. Therefore, the more trustworthy the experimental or computational protocols that generate the interaction data, the higher the confidence score S<em>i</em>.
+<div align="center">
+  <table width="619" border="1" cellpadding="0">
+    <tr>
+      <td width="75">0.80</td>
+      <td width="532"><div align="left"><em>Curated Human Protein Interactions found in HPRD, BIND, </em> and MINT </div></td>
+    </tr>
+    <tr>
+      <td>0.75</td>
+      <td><div align="left">High-throughput human protein interaction experimental data</div></td>
+    </tr>
+    <tr>
+      <td>0.70</td>
+      <td><div align="left">Human protein interactions in OPHID predicted from mouse and rats </div></td>
+    </tr>
+    <tr>
+      <td>0.65</td>
+      <td><div align="left">High-quality human protein interactions in OPHID predicted from drosophila </div></td>
+    </tr>
+    <tr>
+      <td>0.60</td>
+      <td><div align="left">Medium-quality human protein interactions in OPHID predicted from various mouse, rat, and drosophila projects </div></td>
+    </tr>
+    <tr>
+      <td>0.50</td>
+      <td>Human protein interaction data inferred from medium-to-high quality worm and yeast data; high-quality text mining results from STRING</td>
+    </tr>
+    <tr>
+      <td>0.40</td>
+      <td>Human protein interaction data inferred from low-quality worm or curated/high-quality yeast data (including those from MIPS yeast); medium-quality text mining results imported primarily from the STRING database </td>
+    </tr>
+    <tr>
+      <td>0.05-0.35</td>
+      <td>Human protein interaction data inferred from non-interaction data sources (indirect association evidence); low-to-medium-quality text mining results imported primarily from STRING database</td>
+    </tr>
+  </table>
+</div>
+<p>Then, we used a score combination formula (listed below) to combine the individual confidence scores into a final <em>h-score</em> for each interaction that are derived from multiple experimental and computational methods or from different data sources:
+
+<p align="center">	&nbsp;<img src="images/scoring.gif">
+<p align="left">In the above formula, N represents the total count of different data sources and conditions where an indepent assessment of protein interaction reliability score S<em>i</em> exist. 
+<h3 align="left"><strong>Interaction Ranking  Method<a name="ranking"></a></strong></h3>
+<p align="left">  We used a ranking method that works in principle by clustering the distribution of h-scores for all interactions managed in the HAPPI database. The distribution of <em>h-score</em> ranges from 0 to 1. Based on combined score distributions binned properly (see figure below), a 5-star ranking model was developed, where the cutoff threshold is defined at the boundary of significant fall-off or rising bins measured by the &quot;sum of counted interaction&quot; value at the y-axis. 
+<p align="center"><img src="images/score_distr.gif" width="520" height="468" align="middle">
+<p align="left">Therefore, based on the above binned <em>h-score</em> distribution, our ranking star ratings for each interaction in the HAPPI database is defined with the following threshold values of <em>h-scores</em>:
+<div align="center">
+  <table width="503" border="1" cellpadding="0">
+    <tr>
+      <td width="75"><img src="images/stars-1-0.gif" width="64" height="12"></td>
+      <td width="182"><div align="left"><em>h-score</em> &lt; 0.25 </div></td>
+      <td width="230">noisy and unsupported interactions</td>
+    </tr>
+    <tr>
+      <td><img src="images/stars-2-0.gif" width="64" height="12"></td>
+      <td><div align="left">0.25 &lt;= <em>h-score</em> &lt; 0.45 </div></td>
+      <td>very-low-confidence  interactions </td>
+    </tr>
+    <tr>
+      <td><img src="images/stars-3-0.gif" width="64" height="12"></td>
+      <td><div align="left">0.45 &lt;= <em>h-score</em> &lt; 0.75</div></td>
+      <td>low-confidence interactions </td>
+    </tr>
+    <tr>
+      <td><img src="images/stars-4-0.gif" width="64" height="12"></td>
+      <td><div align="left">0.75 &lt;= <em>h-score</em> &lt; 0.90 </div></td>
+      <td>medium-confidence interactions </td>
+    </tr>
+    <tr>
+      <td><img src="images/stars-5-0.gif" width="64" height="12"></td>
+      <td><div align="left">0.90 &lt;= <em>h-score</em> &lt;=1 </div></td>
+      <td>high-confidence interactions </td>
+    </tr>
+  </table>
+</div>
+<p align="left">Note that while reporting HAPPI database stastics, we only use interactions with h-score &gt;= 0.75 (ranked at 4 or 5 star ratings). We do not include plausible interactions in the h-score &lt;0.75 (ranked 1, 2, or 3 stars) in the statistics, although we do allow querying and retrieval of interactions at the rank of 3 star and above. Note that most of the interactions labelled as 3 stars and below are derived from STRING database or text mining methods, where often co-currence of gene/protein names were mentioned above certain frequencies in the same text. It remains uncertain how much interactions from this subset of data are real. Therefore they are excluded from the statistics report of HAPPI database.
+<h3 align="left"><strong>Web Database  Site Map<a name="sitemap"></a></strong></h3>
+<p>
+  <center><a href="images/interface.bmp"></a>
+    <img src="images/interface.bmp">
+  </center>
+
+<h3><strong></strong><strong>User Guide</strong><a name="userguide"></a></h3>
+<p align="left">  We take a minimalist's approch to building a web-based query interface to building the initial version of the HAPPI database.
+<p align="left"> <strong>1. Lookup UniProtID with a gene/protein name (Preparing the initial query) </strong> <a name="FindID"></a><br>
+The home protein interaction query interface requires a single UniProt ID as the only valid  input into the search box. If user does not know the UniProtID to a gene name or a gene description, he may follow the provided external link to go to the UniProt Knowledge Base web site to look up the UniProt ID for any given gene/protein. For example, by  searching UniProt database with Organism=&rdquo;homo sapiens&rdquo; and Pro/Gene Name= &ldquo;insulin  precursor&rdquo;, we can found that the insulin precursor peptide has a UniProt ID &ldquo;INS_HUMAN&rdquo;.  This ID can be copied and pasted back at the search page&rsquo;s home.
+<p align="center"><img src="images/uniprotquery.jpg">
+<p align="left"><strong>2. Search protein interaction records using a protein's UniProtID (Performing the initial query)</strong>
+<p align="left">Enter the query protein's UniProtID, and press the &quot;Search&quot; button. The current version does not allow searching of more than one query protein's interaction records at the same time, which is not common.
+<p align="center"><img src="images/mainquery.jpg" width="623" height="140">
+<p align="left"> <strong>3. Browse protein interactions involving the query protein and its interacting partners</strong>
+  <a name="relsymbol"></a>
+<p align="left">After a query protein is submited, a list of interacting
+  proteins that interact with the query proteins is retrieved into a data grid, along with each protein's descriptions, source of interactions, and a ranking star rating on a scale of 1 to 5 (see discussion of Interaction Ranking Method above for details). The interacting proteins are sorted according to the rank level, with the one ranked at 5 stars listed first, then 4 stars, and so on. The user may click on protein's UniProt IDs to navigator to the &quot;Protein Summary of Facts&quot; page (list #5 below), or click on the relationship symbol of &quot;&lt;=&gt;&quot; to the left of each interacting protein to navigate to the &quot;Protein Interaction Detail&quot; page (see list #4 below). The relationship symbols, although currently only implemented as &lt;=&gt; bi-directional, have been reserved to be uni-direcional ('=&gt;', query protein recruits partner proteins in interaction; or, &quot;&lt;=&quot;, partner protein recruits query protein in interaction). <br>
+  <br>
+  <strong>4. </strong>
+  <strong>Browse protein interaction detailed reports</strong>
+
+<p align="left">In the &ldquo;Protein Interaction Pair Detailed Report&rdquo; page,  users can further examine  biological relationship evidence that may exist between interacting proteins. For  example, previously in the &ldquo;Protein Interaction List&rdquo; page, users can find out that INS_HUMAN (insulin precursor protein) and INSR_HUMAN (insulin receptor  precursor protein) interact with each other with high confidence (a 5-star  ranking). In this page, aided by protein annotation information shown side-by-side for both INS_HUMAN and INSR_HUMAN proteins, users can further conclude that this interaction fits into the &ldquo;peptide ligand -  receptor&rdquo;  binding model, and that the controlled binding of the two proteins play essential roles in several shared common pathways including insulin signaling pathways, type II diabetes, and the DLPRA disease process. 
+
+<p>Various annotation information of the interacting proteins are  available and presented within the same page. In the current release, the annotation information includes: Protein Description from the  UniProt database, corresponding gene symbols from the NCBI GENE database (with hyperlinks  to the original gene entry at NCBI), top literature abstract co-citation  references where the names or synonyms of both genes/proteins are mentioned in  the same abstract (with hyperlinks to the PubMed abstract), top molecular  pathways in the KEGG database associated with each of the proteins (with  hyperlinks to the KEGG pathways), representative protein PDB structures for both proteins whenever available displayed immmediately next to each other, and gene/mRNA sequence feature alignment/annotations. </p>
+<p>In particular, the display of two prontein PDB structures side-by-side along with their mRNA/gene sequence feature and alignment maps, are considered highly innovative. To activate the structure exploration window, a user should first left-click on the JMOL Java applet, and then right-click to reveal the structure exploration menu.  In our current release, it is also possible to directly navigate to corresponding PDB record pages through the hyperlink, or to explore a zoomed-in version of the JMOL structure viewer in a standalone explorer window. To activate and examine what each aligned line segments represents, click on the SafMap feature alignment Java applet first, then move the mouse over to read/access to the line segment of interest to reveal comment box. </p>
+<p align="center"><img src="images/interaction_detail.jpg" width="1035" height="765">
+  <img src="images/pdb_r.jpg" width="1035" height="702">
+<p align="center"><img src="images/safmap_r.jpg" width="1058" height="764">
+<p align="left"><strong>5. Browse protein quick facts</strong>
+<p align="left">In this page, users are provided with a glimpse of a protein's name, gene name, description,  cross-reference of sequence identifiers, and so on. Whenvever external database identifier reference is available, a hypertext link that allows the user to navigate to the original database web pages will be provided as much as possible.
+<p align="center"><img src="images/protein_fact.jpg" width="1039" height="760">
+
+<p align="left"><strong>6. Browse new protein interactions </strong>
+<p align="left">There are two ways to browse new protein interactions. One is to go back to the HAPPI web database home site, and type in a new query protein's UniProt ID. The other is to go to an interacting protein's &quot;Protein Quick Facts&quot; annotation, and click on the hyperlink at the upper right corner labelled as &quot;Browse Its Interactions&quot;. The latter method will allow users to navigate away from initial protein and protein interaction list of interests into adjacent partner proteins and partner protein interactions.
+<p align="left">
+
+<center>
+  <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><a href="index.stm">Home</a>&nbsp;- <a href="dbstatistics.html">Logs &amp;  Statistics</a>&nbsp;- <a href="help.html">Help</a>&nbsp;- <a href="aboutus.html">About Us</a> </font>- <a href="term.html">Terms &amp; Conditions</a><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> </font></p>
+</center>
+            <table width="100%" border="0" cellspacing="16" cellpadding="0" align="center">
+              <tr>
+                <td align="center"><br>
+                    <!--<hr width=100% color=plum> -->
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2">For   questions,
+                      please contact Dr. Jake Chen (<a href="mailto:jakechen@iupui.edu">jakechen@iupui.edu</a>) or SudhaRani Mamidipalli (<a href="mailto:sranin@yahoo.com">sranin@yahoo.com</a></font>)</p>
+                  <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">All Rights
+                    Reserved. Copyright &copy; 2006 by <a href="http://bio.informatics.iupui.edu/">Discovery Informatics and Computing Group</a>, Indiana University.</font></p></td>
+              </tr>
+            </table>
+
+</body>
+</html>

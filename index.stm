@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+	<title>HAPPI</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta name="AUTHOR" content="Sudharani Mamidipalli">
+	<meta name="PUBLISHER" content="Sudharani Mamidipalli">
+	<meta name="description" content="Everything You need to know About human proteins, interactions, domains, functional annotations">
+	<meta name="keywords" content="Bioinformatics, Jake Chen, Systems Biology, Proteomics, Protein Interactomics,Domains, Sudharani Mamidipalli">
+
+
+</head>
+
+<body bgColor=white >
+<form name=proteinform action="http://discover.uits.indiana.edu:8340/ProteinInteractions/listppi.php" method=post ">
+<table border="0">
+  <tr>
+    <td width="100%"><a href="http://bio.informatics.iupui.edu/"><img src="/img/IUPUI_group_logo.gif" alt="" name="IUPUI_Seal" width="745" height="97" border="0"></a> </td>
+  </tr>
+</table>
+
+            <table width=100% border=0>
+              <tr>
+                <td bgcolor="plum" width="100%" height="20"><div align="center"><font color=white face="Verdana, Arial, Helvetica, sans-serif" size="4">Human Annotated and Predicted Protein Interaction (HAPPI) Database - Search Home </font></div></td>
+              </tr>
+            </table>
+            <br>
+            <br>
+            <table style="border:1px solid plum; border-collapse: collapse;" width=620 align="center" cellpadding="0" cellspacing="0" border=0>
+              <tr>
+                <td bgcolor="#FFCCFF" >&nbsp;<em><strong>Begin with  a Query Protein</strong></em></td>
+              </tr>
+              <tr>
+                <td >&nbsp;</td>
+              </tr>
+              <tr>
+                <td >&nbsp;</td>
+              </tr>
+              <tr>
+                <td><div align="center"></div></td>
+              </tr>
+              <tr>
+                <td align=center><font size="-1">Enter a Protein's UniProt ID <a href="http://bio.informatics.iupui.edu/HAPPI/help.html#FindID"><img src="../img/BulbWB.gif" width="11" height="18" border="0"></a>:</font>&nbsp;
+                    <input type="text" name="protein1" value="INS_HUMAN" size="30" MAXLENGTH="80">
+                  &nbsp;
+                <input type=submit value="Search" name=interact></td>
+              </tr>
+              <tr>
+                <td><div align="center">&nbsp;</div></td>
+              </tr>
+              <tr>
+                <td><div align="center"><font size="-1"><a href="http://www.pir.uniprot.org/search/textSearch.shtml" target="_blank"></a></font> <font size="-1"> (Don't know your protein/gene's UniProt ID?Look it up <a href="http://www.pir.uniprot.org/search/textSearch.shtml" target="_blank">here </a>)</font></div></td>
+              </tr>
+              <tr>
+                <td >&nbsp;</td>
+              </tr>
+              <tr>
+                <td >&nbsp;</td>
+              </tr>
+              <tr>
+                <td ><div align="center"></div></td>
+              </tr>
+            </table>
+            <center>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>All protein interactions are collected or inferred computationally from public sources. </p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><a href="index.stm">Home</a>&nbsp;- <a href="dbstatistics.html">Logs &amp;  Statistics</a>&nbsp;- <a href="help.html">Help</a>&nbsp;- <a href="aboutus.html">About Us</a> </font>- <a href="term.html">Terms &amp; Conditions</a><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> </font></p>
+  </center>
+            <table width="100%" border="0" cellspacing="16" cellpadding="0" align="center">
+              <tr>
+                <td align="center"><br>
+                    <!--<hr width=100% color=plum> -->
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2">For   questions,
+                      please contact Dr. Jake Chen (<a href="mailto:jakechen@iupui.edu">jakechen@iupui.edu</a>) or SudhaRani Mamidipalli (<a href="mailto:sranin@yahoo.com">sranin@yahoo.com</a></font>)</p>
+                  <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">All Rights
+                    Reserved. Copyright &copy; 2006 by <a href="http://bio.informatics.iupui.edu/">Discovery Informatics and Computing Group</a>, Indiana University.</font></p></td>
+              </tr>
+            </table>
+</form>
+<!--#include file="/statcounter_h.htm"-->
+</body>
+</html>
