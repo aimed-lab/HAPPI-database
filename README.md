@@ -1,6 +1,6 @@
 # HAPPI-database
 
-# Web Tool
+## Web Tool
 http://discovery.informatics.uab.edu/HAPPI/index.php
 
 ## About
